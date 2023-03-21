@@ -189,6 +189,7 @@ from matplotlib.colors import LinearSegmentedColormap
 import geopandas
 from matplotlib import colorbar
 
+
 # MARKOV CHAIN ANALYSIS
 
 def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
@@ -210,7 +211,7 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     COUNTY_FIELD_NAME = county_field[STATE]
     ASSIGNMENT = assignment_field[STATE]
 
-    graph = Graph.from_json(''.join([STATE, YEAR, '/', STATE, '_VTDs.json']))
+    graph = Graph.from_json(''.join(['maps/', STATE, YEAR, '/', STATE, '_VTDs.json']))
 
     elections = []
     elections.append(Election(ELECTION_USED, {"Democratic": dem_vote, "Republican": gop_vote}))
@@ -469,7 +470,7 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
         return LinearSegmentedColormap.from_list("custom", district_colors)
 
     
-    units = geopandas.read_file(''.join([STATE, YEAR, '/', STATE, '.shp']))
+    units = geopandas.read_file(''.join(['maps/', STATE, YEAR, '/', STATE, '.shp']))
     units.to_crs({"init": "epsg:"+projection_code[STATE]}, inplace=True)
 
     figMap, axMap = plt.subplots(3, 3, figsize = (14, 7), height_ratios = [10,10,1])
@@ -512,24 +513,20 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
         axMap2[2, col].set_title(colorbar_desc[col])
         colorbar.ColorbarBase(ax=axMap2[2,col], cmap=bar, orientation = 'horizontal')
 
-# # OVERNIGHT RUNS
-# analysis('AZ', 15000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
-# analysis('CO', 6000, 'GOV18') # cleared
-# analysis('GA', 10000, 'PRES16') # cleared
-# analysis('MI', 8000, 'PRES16') # cleared - remade the json
-# analysis('MN', 6000, 'PRES16') # cleared
-# analysis('NC', 12000, 'PRES16') # cleared; error with shapefile
-# analysis('OH', 5000, 'PRES16') # cleared
-# # analysis('OR', 30, 'GOV18') # 2nd district has polsby popper of 5.511766159282041..... need to fix
-# analysis('PA', 5000, 'PRES16') # cleared
-# analysis('TX', 8000, 'PRES16') # cleared; error with shapefile
-# analysis('WI', 3000, 'PRES16') # cleared
+# OVERNIGHT RUNS
+analysis('AZ', 15000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
+analysis('CO', 6000, 'GOV18') # cleared
+analysis('GA', 10000, 'PRES16') # cleared
+analysis('MI', 8000, 'PRES16') # cleared - remade the json
+analysis('MN', 6000, 'PRES16') # cleared
+analysis('NC', 12000, 'PRES16') # cleared; error with shapefile
+analysis('OH', 5000, 'PRES16') # cleared
+# analysis('OR', 30, 'GOV18') # 2nd district has polsby popper of 5.511766159282041..... need to fix
+analysis('PA', 5000, 'PRES16') # cleared
+analysis('TX', 8000, 'PRES16') # cleared; error with shapefile
+analysis('WI', 3000, 'PRES16') # cleared
 
 # TEST
-analysis('NC', 10000, 'PRES16')
-
-# analysis('GA', 10000, 'PRES16') # cleared
-# analysis('MI', 8000, 'PRES16') # cleared - remade the json
-# analysis('WI', 5000, 'PRES16') # cleared
+# analysis('NC', 10, 'PRES16')
 
 plt.show()

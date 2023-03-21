@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap');
+* {
+    border: 0;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+* {
+    border: 0;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Exo 2';
+}
+
+.hero {
+    text-align: center;
+    height: 75vh;
+}
+
+.hero .title {
+    font-size: 4vw;
+    margin-top: 25vh;
+}
+
+.hero .subtitle {
+    font-size: 2vw;
+    margin-top: 5vh;
+    margin-bottom: 7vh;
+}
+
+.hero .hero-cta a:link, a:visited{
+    color: white;
+    text-decoration: none;
+    background: rgb(49, 49, 186);
+    color: white;
+    padding: .6em 1.3em;
+    font-size: 2vw;
+    border-radius: 0.5em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.hero .hero-cta a:hover, a:active {
+    background-color: rgb(65, 65, 240);
+}
+
+.hero .issue {
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.hero .issue img {
+    width: 4em;
+    height: 4em;
+}
+
+p {
+    line-height: 1.2em;
+    margin-bottom: 0.6em;
+}
+
+h2 {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+.explainer .container {
+    padding: 4vw;
+    font-size: 1.4em;
+}
+
+.quote {
+    font-style: italic;
+}
+
+.quote-attr {
+    text-align: right;
+    margin-top: 0.7em;
+    margin-bottom: 1.6em;
+}
+
+.description img {
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
