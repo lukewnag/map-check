@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap');
+
 * {
     border: 0;
     outline: 0;
@@ -21,22 +22,64 @@ body {
 }
 
 .hero {
+    position: relative;
     text-align: center;
-    height: 75vh;
+    height: 100vh;
+}
+
+.hero .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.hero .background .pic {
+    height: 100%;
+    width: 400vw;
+    margin-top: 2em;
+    background-image: url('/img/background.png');
+    background-repeat: repeat-x;
+    animation: infscroll 30s linear infinite;
+    opacity: 0.2;
+}
+
+@keyframes infscroll {
+    0% {
+        transform: translateX(0) scale(1.1);
+    }
+
+    97% {
+        transform: translate(-200vw) scale(1.1);
+    }
+
+    100% {
+        transform: translateX(0%) scale(1.1);
+    }
+}
+
+.hero .container {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero .title {
     font-size: 4vw;
-    margin-top: 25vh;
 }
 
 .hero .subtitle {
     font-size: 2vw;
     margin-top: 5vh;
-    margin-bottom: 7vh;
 }
 
-.hero .hero-cta a:link, a:visited{
+.hero .hero-cta a:link,
+a:visited {
     color: white;
     text-decoration: none;
     background: rgb(49, 49, 186);
@@ -48,7 +91,8 @@ body {
     display: inline-block;
 }
 
-.hero .hero-cta a:hover, a:active {
+.hero .hero-cta a:hover,
+a:active {
     background-color: rgb(65, 65, 240);
 }
 
@@ -95,4 +139,10 @@ h2 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.select .container {
+    text-align: center;
+    margin-top: 10vh;
+    font-size: 2em;
 }

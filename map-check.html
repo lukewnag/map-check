@@ -5,14 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MapCheck</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <section class="select">
         <div class="container">
             <div class="title">
-                <h2>Select a state</h2>
+                <h1>Select a state</h1>
             </div>
         </div>
     </section>
+    <section class="analysis">
+        <div class="display">
+            <form method="" action="" name="myForm">
+                <select size="10" name="switch" onchange="switchImage();">
+                    <option value="0">Arizona</option>
+                    <option value="1">Colorado</option>
+                    <option value="2">Georgia</option>
+                    <option value="3">Michigan</option>
+                    <option value="4">Minnesota</option>
+                    <option value="5">North Carolina</option>
+                    <option value="6">Ohio</option>
+                    <option value="7">Pennsylvania</option>
+                    <option value="8">Texas</option>
+                    <option value="9">Wisconsin</option>
+                </select>
+            </form>
+            <h2>Metrics</h2>
+            <img src="./output/NC2011/ensemble.png" width="1400" height="600" name="ensemble" />
+            <h2>Boxplot</h2>
+            <img src="./output/NC2011/boxplot.png" width="800" height="600" name="boxplot" />
+            <h2>The districting plan and ensemble-drawn maps</h2>
+            <img src="./output/NC2011/map1.png" width="1400" height="700" name="map1" />
+            <img src="./output/NC2011/map2.png" width="1400" height="700" name="map2" />
+            
+        </div>
+    </section>
+    <script src="js/index.js"></script>
 </body>
 </html>
