@@ -61,7 +61,87 @@
                 <p>What does all this mean?</p>
             </button>
             <div class="content">
-                <div class="more-content">Insert description here!</div>
+                <div class="more-content">
+                    <ul class="description">
+                        <li>
+                            <b>Minority representation</b>
+                            <p> A district is categorized as a minority opportunity district if one of the following 
+                                conditions are satisfied:
+                            </p>
+                            <p>- At least 53% of the district's population is of a racial minority. The additional 
+                                3% above the majority-minority baseline is necessary to ensure that minority voters 
+                                are able to elect a candidate of their choice, even if their turnout is depressed.
+                            </p>
+                            <p>- At least 53% of the district's vote share in a 50-50 national environment goes 
+                                towards Democrats, and minority voters make up a majority of the Democrats' voter 
+                                base so that they can elect their desired candidate in the primary.
+                            </p>
+                            <p>Currently, my algorithm assumes that 80% of minority votes are for Democrats 
+                                regardless of geographic location (which has a significant effect on how people vote). 
+                                I based this estimate off of the 
+                                <a href="https://www.pewresearch.org/politics/2018/08/09/an-examination-of-the-2016-electorate-based-on-validated-voters/">
+                                    2016 national exit polls,
+                                </a> in which roughly 79% of minority voters voted for Clinton, and the 
+                                <a href="https://www.cnn.com/election/2020/exit-polls/president/national-results">
+                                    2020 national exit polls,
+                                </a> in which roughly 74% of minority voters voted for Biden.
+                                In the future, this can be improved upon by using an ecological interference model 
+                                to estimate how individual minority groups voted in each precinct. This will give a 
+                                much more accurate result than assuming every minority group gives the same share 
+                                of their votes to Democrats.
+                            </p>
+                        </li>
+                        <li>
+                            <b>Polsby-Popper</b>
+                            <p>e</p>
+                        </li>
+                        <li>
+                            <b>Expected Democrat seats</b>
+                            <p>The probability of a Democrat winning in each district is calculated using two 
+                                normal distributions overlaid on top of each other. The first normal 
+                                distribution is centered around the Democratic vote share in the district and has 
+                                standard deviation 0.03, representing cycle-level differences in the Democratic 
+                                vote share. The second normal distribution is centered at points drawn from 
+                                the first normal distribution, has standard deviation 0.02, and represents 
+                                district-level variations in the Democratic vote share. The expected number of 
+                                seats won by Democrats is the sum of all of these values throughout each district.  
+                                This works by Linearity of Expectation, a mathematical property that allows us to 
+                                ignore the fact that Democratic vote shares in the same election cycle are 
+                                correlated with each other.
+                            </p>
+                            <p>This is essentially a simplified version of the Bayesian hierarchical model used by 
+                                <a href="https://planscore.org/models/data/2022F/">PlanScore</a> to calculate the 
+                                probability of each party winning an election in each district. The largest 
+                                difference is that this simplified version recenters the Democratic vote based on 
+                                the partisan lean of the overall election (explained in the "Boxplot" section).
+                            </p>
+                        </li>
+                        <li>
+                            <b>Geographic score</b>
+                            <p>e</p>
+                        </li>
+                        <li>
+                            <b>Regression</b>
+                            <p>e</p>
+                        </li>
+                        <li>
+                            <b>Competitiveness score</b>
+                            <p>e</p>
+                        </li>
+                        <li>
+                            <b>Efficiency gap</b>
+                            <p>e</p>
+                        </li>
+                        <li>
+                            <b>Partisan Gini score</b>
+                            <p>e</p>
+                        </li>
+                        <li>
+                            <b>Composite score</b>
+                            <p>e</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <h2>Boxplot</h2>
