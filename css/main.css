@@ -13,6 +13,87 @@ body {
     font-family: 'Exo 2';
 }
 
+.navbar {
+    background: #29668a;
+    padding: 1em;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    color: white;
+    font-size: 1.2em;
+}
+
+.navbar a {
+    text-decoration:none;
+    color: #ffffff;
+}
+
+.navbar nav {
+    display: none;
+    text-decoration: none;
+}
+
+.navbar .container {
+    display: flex;
+    place-content: space-between;
+    
+}
+
+.navbar .mobile-menu {
+    float: right;
+    margin: .5em;
+    cursor: pointer;
+}
+
+nav.menu-btn {
+    display: block;
+}
+
+nav {
+    position: fixed;
+    z-index: 990;
+    width: 100%;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to right, #29668a8d, #29668a);
+    height: 100vh;
+    padding: 1em;
+}
+
+nav ul.primary-nav {
+    margin-top: 4em;
+}
+
+.navbar .container .big-name {
+    font-weight: bold;
+}
+
+nav li {
+    padding: .5em;
+    font-size: 1.3em;
+    text-align: right;
+}
+
+nav li a:hover {
+    font-weight: bold;
+}
+
+nav li a:active {
+    background: none;
+}
+
+.mobile-menu-exit {
+    float: right;
+    margin: .5em;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 .hero {
     position: relative;
     text-align: center;
@@ -32,8 +113,8 @@ body {
 .hero .background .pic {
     height: 100%;
     width: 400vw;
-    margin-top: 2rem;
-    background-image: url('../img/background.png');
+    margin-top: 4rem;
+    background-image: url('../img/background.jpg');
     background-repeat: repeat-x;
     animation: infscroll 30s linear infinite;
     opacity: 0.2;
@@ -41,15 +122,15 @@ body {
 
 @keyframes infscroll {
     0% {
-        transform: translateX(0) scale(1.1);
+        transform: translateX(0) scale(1);
     }
 
     97% {
-        transform: translate(-200vw) scale(1.1);
+        transform: translate(-200vw) scale(1);
     }
 
     100% {
-        transform: translateX(0%) scale(1.1);
+        transform: translateX(0%) scale(1);
     }
 }
 
@@ -62,13 +143,13 @@ body {
 }
 
 .hero .title {
-    font-size: 4vw;
+    font-size: 8vw;
 }
 
 .hero .subtitle {
-    font-size: 2vw;
-    margin-top: 5vh;
-    margin-bottom: 3vh;
+    font-size: 2.8vw;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .hero-cta a:link, a:visited {
@@ -77,7 +158,7 @@ body {
     background: rgb(49, 49, 186);
     color: white;
     padding: .6rem 1.3rem;
-    font-size: 2vw;
+    font-size: 4vw;
     border-radius: 0.5rem;
     font-weight: bold;
     display: inline-block;
@@ -88,7 +169,7 @@ body {
 }
 
 .hero .issue {
-    font-size: 1.4rem;
+    font-size: 2.8vw;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -116,7 +197,7 @@ h2 {
 
 .explainer .container {
     padding: 4vw;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .quote {
@@ -130,7 +211,7 @@ h2 {
 }
 
 .description img {
-    width: 400px;
+    max-width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -138,7 +219,7 @@ h2 {
 
 .select .container {
     text-align: center;
-    margin-top: 10vh;
+    padding-top: 7.5rem;
     font-size: 2rem;
 }
 
@@ -200,4 +281,74 @@ h2 {
 
 .analysis h2 {
     margin-top: 2rem;
+}
+
+.process {
+    padding: 4vw;
+    padding-top: 7.5rem;
+}
+
+@media only screen and (min-width: 400px) {
+    .description img {
+        width: 400px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .mobile-menu, .mobile-menu-exit {
+        display: none;
+    }
+    .navbar {padding: 0.4em 1em;}
+    .navbar .container {
+        display: grid;
+        grid-template-columns: 180px auto;
+    }
+    .navbar nav {
+        display: flex;
+        justify-content: space-between;
+        background: none;
+        position: unset;
+        height: auto;
+        width: 100%;
+        padding: 0;
+    }
+    .navbar nav ul {
+        display: flex;
+    }
+    .navbar .container .big-name {
+        padding: .1em 0.5em;
+        font-size: 1em;
+        margin-top: 0.8em;
+    }
+    .navbar .container a {
+        padding: .1em 0.5em;
+        font-size: 0.8em;
+    }
+
+    .navbar nav ul.primary-nav {
+        margin: 0;
+        margin-right: 2em;
+    }
+
+    .navbar nav li.current a {
+        font-weight: bold;
+    }
+
+    
+    .hero .title {
+        font-size: 4rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .hero-cta a:link, a:visited {
+        padding: .6rem 1.3rem;
+        font-size: 2rem;
+    }
+
+    .hero .issue {
+        font-size: 1.4rem;
+    }
 }
