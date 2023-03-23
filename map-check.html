@@ -58,13 +58,34 @@
             <h2>Metrics</h2>
             <img src="./output/NC2011/ensemble.png" name="ensemble" class="ensemble"/>
             <button type="button" class="collapsible">
-                <p>What do all these things mean?</p>
+                <p>What does all this mean?</p>
             </button>
             <div class="content">
                 <div class="more-content">Insert description here!</div>
             </div>
 
             <h2>Boxplot</h2>
+            <p>Here, the red line denotes the "lean" of the election to adjust for overly strong elections 
+                for either party. For presidential elections, this "lean" is the Democratic two-party vote 
+                share nationally, while for gubernatorial elections, this "lean" is the state's partisan lean 
+                (calculated by averaging the Democratic two-party vote share in the two most recent 
+                presidential elections after adjusting for the national vote share) subtracted from Democratic 
+                two-party vote share.
+            </p>
+            <p>All districts displayed are sorted from lowest to highest Democratic vote share. The red dots 
+                represent the Democratic vote shares of districts in the initial plan.
+            </p>
+            <p>One sign of gerrymandering is if there is a suspicious absence of red points close to the red line. 
+                Points within 5 percentage points of this red line (or 0.05 on the plot) are considered to be 
+                competitive districts, meaning that both parties have a significant chance of winning elections 
+                held in this district. Thus, a plan with a lack of these districts means that elections under this 
+                plan are largely predetermined: that is, one party's dominance in each district is nearly guaranteed.
+            </p>
+            <p>We can also compare the red points to the boxplots' positions. If a large proportion of the red points 
+                are outliers, especially if they lie further away from the red line than the boxplot does whenever 
+                the boxplot is close to the red line, there's a high chance that the starting plan was drawn with 
+                partisan interests in mind.
+            </p>
             <img src="./output/NC2011/boxplot.png" name="boxplot" class="boxplot"/>
             
             <h2>Official districting plan compared to ensemble-drawn maps</h2>
