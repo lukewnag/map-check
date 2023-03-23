@@ -33,7 +33,7 @@ body {
     height: 100%;
     width: 400vw;
     margin-top: 2rem;
-    background-image: url('./img/background.png');
+    background-image: url('../img/background.png');
     background-repeat: repeat-x;
     animation: infscroll 30s linear infinite;
     opacity: 0.2;
