@@ -14,10 +14,26 @@ for (var i = 0; i < 10; i++) {
     map2List[i].src = "./output/" + states[i] + "2011/map2.png";
 }
 
+var stateFullNames = ['Arizona', 'Colorado', 'Georgia', 'Michigan', 'Minnesota', 'North Carolina',
+    'Ohio', 'Pennsylvania', 'Texas', 'Wisconsin']
 function switchImage() {
-    var selectedImage = document.myForm.switch.options[document.myForm.switch.selectedIndex].value;
+    var selectedImage = document.stateSelector.switch.options[document.stateSelector.switch.selectedIndex].value;
     document.ensemble.src = ensembleList[selectedImage].src;
     document.boxplot.src = boxplotList[selectedImage].src;
     document.map1.src = map1List[selectedImage].src;
     document.map2.src = map2List[selectedImage].src;
+    document.getElementById('selection').innerHTML = stateFullNames[selectedImage];
+}
+
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
 }

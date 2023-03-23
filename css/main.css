@@ -8,14 +8,6 @@
     box-sizing: border-box;
 }
 
-* {
-    border: 0;
-    outline: 0;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
     font-family: 'Exo 2';
@@ -40,7 +32,7 @@ body {
 .hero .background .pic {
     height: 100%;
     width: 400vw;
-    margin-top: 2em;
+    margin-top: 2rem;
     background-image: url('/img/background.png');
     background-repeat: repeat-x;
     animation: infscroll 30s linear infinite;
@@ -76,28 +68,27 @@ body {
 .hero .subtitle {
     font-size: 2vw;
     margin-top: 5vh;
+    margin-bottom: 3vh;
 }
 
-.hero .hero-cta a:link,
-a:visited {
+.hero .hero-cta a:link, a:visited {
     color: white;
     text-decoration: none;
     background: rgb(49, 49, 186);
     color: white;
-    padding: .6em 1.3em;
+    padding: .6rem 1.3rem;
     font-size: 2vw;
-    border-radius: 0.5em;
+    border-radius: 0.5rem;
     font-weight: bold;
     display: inline-block;
 }
 
-.hero .hero-cta a:hover,
-a:active {
+.hero .hero-cta a:hover, a:active {
     background-color: rgb(65, 65, 240);
 }
 
 .hero .issue {
-    font-size: 18px;
+    font-size: 1.4rem;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -105,23 +96,23 @@ a:active {
 }
 
 .hero .issue img {
-    width: 4em;
-    height: 4em;
+    width: 4rem;
+    height: 4rem;
 }
 
 p {
-    line-height: 1.2em;
-    margin-bottom: 0.6em;
+    line-height: 1.2rem;
+    margin-bottom: 0.6rem;
 }
 
 h2 {
-    margin-top: 0.6em;
-    margin-bottom: 0.6em;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
 }
 
 .explainer .container {
     padding: 4vw;
-    font-size: 1.4em;
+    font-size: 1.4rem;
 }
 
 .quote {
@@ -130,8 +121,8 @@ h2 {
 
 .quote-attr {
     text-align: right;
-    margin-top: 0.7em;
-    margin-bottom: 1.6em;
+    margin-top: 0.7rem;
+    margin-bottom: 1.6rem;
 }
 
 .description img {
@@ -144,5 +135,65 @@ h2 {
 .select .container {
     text-align: center;
     margin-top: 10vh;
-    font-size: 2em;
+    font-size: 2rem;
+}
+
+.analysis .container {
+    padding: 4vw;
+    font-size: 1.4rem;
+}
+
+.collapsible {
+    background-color: #e7e7e7;
+    cursor: pointer;
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+    padding-bottom: 0.9rem;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.4rem;
+    font-family: 'Exo 2';
+}
+  
+.collapsible:hover {
+    background-color: #ccc;
+}
+  
+.content {
+    padding: 0 2rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+.more-content {
+    padding: 1rem 0;
+    font-size: 1rem;
+}
+
+.selector {
+    font-family: 'Exo 2';
+    background-color: #f1f1f1;
+    font-size: 1rem;
+}
+
+.ensemble, .map1, .map2 {
+    max-width: 100%;
+    height: auto;
+}
+
+.map2 {
+    padding-top: 4rem;
+}
+
+.boxplot {
+    max-width: 70%;
+    height: auto;
+}
+
+.analysis h2 {
+    margin-top: 2rem;
 }
