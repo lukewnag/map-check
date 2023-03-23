@@ -82,6 +82,11 @@ nav li a:active {
     background: none;
 }
 
+/* this part doesn't work for some reason */
+.navbar .big-name a:active { 
+    background: none;
+}
+
 .mobile-menu-exit {
     float: right;
     margin: .5em;
@@ -186,7 +191,7 @@ ul {
 }
 
 p {
-    line-height: 1.2em;
+    line-height: 1.25em;
     margin-bottom: 0.6em;
 }
 
@@ -283,9 +288,14 @@ h2 {
     margin-top: 2rem;
 }
 
-.process {
+.process .container {
     padding: 4vw;
     padding-top: 7.5rem;
+    font-size: 1.2rem;
+}
+
+.process h1 {
+    margin-bottom: 2rem;
 }
 
 @media only screen and (min-width: 400px) {

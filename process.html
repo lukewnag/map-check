@@ -25,6 +25,37 @@
             </nav>
         </div>
     </div>
-    <div class="process">hi</div>
+    <section class="process">
+        <div class="container">
+            <div class="title">
+                <h1>What's going on?</h1>
+            </div>
+            <p>
+                To build districts in each ensemble, this algorithm uses Monte Carlo Markov Chains, implemented 
+                by the Gerrychain library. Monte Carlo Markov Chains combine the Monte Carlo method, which 
+                draws random samples to form an estimate of the probability distribution, with Markov Chains, 
+                which use the previous outcome to generate a new outcome. When the Markov Chain's new outcomes 
+                have low correlation with the previous outcome, the probability distribution it produces is 
+                more representative of random sampling, so a Monte Carlo Markov Chain can produce a very close 
+                approximation to the probability distribution of a completely random ensemble. More details can 
+                be found in Dr. Daryl DeFord's 
+                <a href="https://www.math.wsu.edu/faculty/ddeford/MCMC_Intro_plus.pdf">tutorial</a>.
+            </p>
+            <p>
+                Sometimes, a state's electoral map can be so skewed that any set of districts that has any 
+                correlation at all with the original map is biased as well. To ensure that districts in the 
+                computer-generated ensemble are independent of the initial state (the state's electoral map), 
+                we use the Recombination method, which produces outcomes with far lower correlation with the 
+                initial state. The essence of this algorithm is to combine two adjacent districts, draw a minimum 
+                spanning tree, then sever a single connection in this tree to separate these two districts again. 
+                Details on this method can be found on the Metric Geometry and Gerrymandering Group's 
+                <a href="https://mggg.org/uploads/ReCom.pdf">website</a>.
+            </p>
+            <p>
+                All code used to produce all parts of this website, including the graphs and maps, can be found 
+                on my <a href="https://www.github.com/lukewnag/map-check">GitHub repository</a>.
+            </p>
+        </div>
+    </section>
 </body>
 </html>
