@@ -71,7 +71,7 @@ body {
     margin-bottom: 3vh;
 }
 
-.hero .hero-cta a:link, a:visited {
+.hero-cta a:link, a:visited {
     color: white;
     text-decoration: none;
     background: rgb(49, 49, 186);
@@ -83,7 +83,7 @@ body {
     display: inline-block;
 }
 
-.hero .hero-cta a:hover, a:active {
+.hero-cta a:hover, a:active {
     background-color: rgb(65, 65, 240);
 }
 
@@ -100,14 +100,18 @@ body {
     height: 4rem;
 }
 
+.hero .issue a:active {
+    background: none;
+}
+
 p {
-    line-height: 1.2rem;
-    margin-bottom: 0.6rem;
+    line-height: 1.2em;
+    margin-bottom: 0.6em;
 }
 
 h2 {
-    margin-top: 0.6rem;
-    margin-bottom: 0.6rem;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
 }
 
 .explainer .container {
