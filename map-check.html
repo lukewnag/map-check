@@ -129,15 +129,41 @@
                         </li>
                         <li>
                             <b>Split pairs score</b>
-                            <p>e</p>
+                            <p></p>
                         </li>
                         <li>
                             <b>Regression</b>
-                            <p>e</p>
+                            <p>To calculate the regression score of a plan, the districts are first sorted by 
+                                their Democratic vote shares (see the boxplot in the next section). Next, the 
+                                program fits the points to a linear regression and calculates the R-squared 
+                                coefficient. A low regression score indicates that the enacted plan may have an 
+                                unnecessarily large jump in the partisan leans of its districts, an indicator 
+                                of gerrymandering.
+                            </p>
+                            <p>Comparing an enacted plan's regression score to the scores of plans in a large 
+                                ensemble allows us to examine the plan's regression score in context of the 
+                                political geography of the state. Doing so allows us to see that in some states, 
+                                such as Ohio and North Carolina, a near-perfect regression score of greater than 
+                                0.99 can be achieved, while in other states like Pennsylvania, reasonably compact 
+                                plans that achieve a regression score above 0.95 are extremely rare.
+                            </p>
                         </li>
                         <li>
                             <b>Competitiveness score</b>
-                            <p>e</p>
+                            <p>The competitiveness score for each district is calculated by finding 
+                                the party that is less likely to win the district, then doubling the percent 
+                                chance that this party wins the district's election. This caps the district's 
+                                score at 100. The competitiveness score for the entire map is computed by 
+                                averaging the competitiveness scores for each district in the map.
+                            </p>
+                            <p>Competitive elections make it easier for the public to hold their elected officials 
+                                accountable, so a plan with a high competitiveness score could promote more 
+                                responsive (and responsible) elected officials. However, this can also be an
+                                indication of a failed gerrymander: that is, a map with formerly "safe" districts 
+                                for one party that voter realignments have made more competitive. Examples include 
+                                Georgia's 6th and 7th Congressional Districts, as well as Virginia's 10th 
+                                Congressional District, where I used to live, in the late 2010s.
+                            </p>
                         </li>
                         <li>
                             <b>Efficiency gap</b>
