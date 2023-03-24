@@ -117,7 +117,7 @@ def num_county_splits(partition, countyFieldName):
 
 # how well does this partition preserve geographic boundaries (county lines)?
 # from gerrychain.updaters import county_splits
-def geographic_boundary_score(partition, countyFieldName, populationFieldName): #examples: 'COUNTYFP10', 'CNTY_NAME'
+def split_pairs_score(partition, countyFieldName, populationFieldName): #examples: 'COUNTYFP10', 'CNTY_NAME'
     node_counties = (county_splits(partition, countyFieldName))
     counties = node_counties.keys() # contains each county's name - for lookup
 
@@ -136,8 +136,9 @@ def geographic_boundary_score(partition, countyFieldName, populationFieldName): 
             districtPop[cd] += partition.graph.nodes[node][populationFieldName]
         county_cds = districtPop.keys() # electoral districts contained within county
         dist_in_county_pops = [districtPop[dist] for dist in county_cds]
-        county_pop = sum(dist_in_county_pops)
-        random_guess_correct = max(dist_in_county_pops)/county_pop # chance that a random guess of a resident's district is correct
+        county_pop = sum([districtPop[dist] for dist in county_cds])
+        county_pop2 = sum([districtPop[dist]**2 for dist in county_cds])
+        random_guess_correct = county_pop2/(county_pop**2) # chance that a random guess of a resident's district is correct
         score += random_guess_correct
 
     return score
@@ -280,7 +281,7 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     minority_raw = []
     avg_polsby_raw, min_polsby_raw = [], []
     expected_dems = []
-    geographic_scores = []
+    split_pairs_scores = []
     regression_scores = []
     competitiveness_scores = []
     efficiency_gaps, gini_scores = [], []
@@ -294,7 +295,7 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
         avg_polsby_raw.append(overall_polsby_popper(partition))
         min_polsby_raw.append(min_polsby_popper(partition))
         expected_dems.append(expectedDem(lean, dem_voteshare))
-        geographic_scores.append(geographic_boundary_score(partition, COUNTY_FIELD_NAME, POP_FIELD_NAME))
+        split_pairs_scores.append(split_pairs_score(partition, COUNTY_FIELD_NAME, POP_FIELD_NAME))
         regression_scores.append(regression(dem_voteshare))
         competitiveness_scores.append(competitiveness_score(lean, dem_voteshare))
         efficiency_gaps.append(100*partisan.efficiency_gap(partition[ELECTION_USED]))
@@ -323,13 +324,13 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     efficiency_deviation = [abs(efficiency_gaps[i]) for i in range(len(efficiency_gaps))]
 
     weights = [20/len(partition.parts), 4, 10, -20/len(partition.parts), 0.05, (len(partition.parts)*50)**0.5, 0.15, -0.2, -25] #TODO
-    composite_data = [minority_raw, avg_polsby_raw, min_polsby_raw, deviation_from_expected, geographic_scores,
+    composite_data = [minority_raw, avg_polsby_raw, min_polsby_raw, deviation_from_expected, split_pairs_scores,
                       regression_scores, competitiveness_scores, efficiency_deviation, gini_scores]
     composite_scores = [sum([weights[metric]*composite_data[metric][i]
                             for metric in range(len(weights))]) for i in range(len(expected_dems))]
 
 
-    raw_data = [minority_raw, avg_polsby_raw, min_polsby_raw, expected_dems, geographic_scores, regression_scores,
+    raw_data = [minority_raw, avg_polsby_raw, min_polsby_raw, expected_dems, split_pairs_scores, regression_scores,
                 competitiveness_scores, efficiency_gaps, gini_scores, composite_scores]
 
     vote_data = DataFrame(unprocessed_vote_data)
@@ -387,7 +388,7 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     ax[0,1].set_title("Average Polsby-Popper")
     ax[0,2].set_title("Smallest Polsby-Popper")
     ax[0,3].set_title("Expected Democrat Seats")
-    ax[0,4].set_title("Geographic Score")
+    ax[0,4].set_title("Split Pairs Score")
     ax[1,0].set_title("Regression")
     ax[1,1].set_title("Competitiveness Score")
     ax[1,2].set_title("Efficiency Gap")
@@ -395,6 +396,9 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     ax[1,4].set_title("Composite Score")
 
     fig.tight_layout(pad=3.0)
+
+    fig.savefig(f"output/{STATE}{YEAR}/ensemble.png")
+    figBP.savefig(f"output/{STATE}{YEAR}/boxplot.png")
 
     # display the districts
     
@@ -512,6 +516,9 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
         colorbar.ColorbarBase(ax=axMap[2,col], cmap=bar, orientation = 'horizontal')
         axMap2[2, col].set_title(colorbar_desc[col])
         colorbar.ColorbarBase(ax=axMap2[2,col], cmap=bar, orientation = 'horizontal')
+    
+    figMap.savefig(f"output/{STATE}{YEAR}/map1.png")
+    figMap2.savefig(f"output/{STATE}{YEAR}/map2.png")
 
 # OVERNIGHT RUNS
 analysis('AZ', 15000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
@@ -521,7 +528,6 @@ analysis('MI', 8000, 'PRES16') # cleared - remade the json
 analysis('MN', 6000, 'PRES16') # cleared
 analysis('NC', 12000, 'PRES16') # cleared; error with shapefile
 analysis('OH', 5000, 'PRES16') # cleared
-# analysis('OR', 30, 'GOV18') # 2nd district has polsby popper of 5.511766159282041..... need to fix
 analysis('PA', 5000, 'PRES16') # cleared
 analysis('TX', 8000, 'PRES16') # cleared; error with shapefile
 analysis('WI', 3000, 'PRES16') # cleared
@@ -529,4 +535,5 @@ analysis('WI', 3000, 'PRES16') # cleared
 # TEST
 # analysis('NC', 10, 'PRES16')
 
-plt.show()
+# BAD
+# analysis('OR', 30, 'GOV18') # 2nd district has polsby popper of 5.511766159282041..... need to fix
