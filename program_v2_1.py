@@ -190,6 +190,12 @@ from matplotlib.colors import LinearSegmentedColormap
 import geopandas
 from matplotlib import colorbar
 
+# used to do tab20, but sometimes I need more colors!
+colors40 = ["#c21f5b","#fbc02c","#ff5722","#bf360c","#fdf9c3","#c5cae9","#fff177","#f8bbd0","#e1bee7","#3f51b5","#aed581",
+          "#253137","#ba68c8","#ffccbc","#9c27b0","#90a4ae","#e92663","#0488d1","#7986cb","#e64a18","#03a9f4","#f06292",
+          "#f67f17","#19237e","#03579b","#cfd8dc","#ddedc8","#689f38","#607d8b","#b3e5fc","#303f9f","#33691d","#455a64",
+          "#88144f","#8bc34a","#ff8a65","#4a198c","#7b21a2","#4fc3f7","#ffec3a"]
+tab40 = LinearSegmentedColormap.from_list("custom", colors40)
 
 # MARKOV CHAIN ANALYSIS
 
@@ -269,10 +275,10 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
         initial_state=initial_partition,
         total_steps=TOTAL_STEPS
     )
-# az: 42.740 vote, nat lean = -2.572 --> 45.312
-# co: 55.509 vote, nat lean = 3.108 --> 52.401
-# mi: 54.892 vote, nat lean = -1.056 --> 55.948
-# or: 53.412, nat lean = 5.527 --> 47.885
+    # az: 42.740 vote, nat lean = -2.572 --> 45.312
+    # co: 55.509 vote, nat lean = 3.108 --> 52.401
+    # mi: 54.892 vote, nat lean = -1.056 --> 55.948
+    # or: 53.412, nat lean = 5.527 --> 47.885
     gov_leans = {'AZ': 45.312, 'CO': 52.401, 'MI': 55.948, 'OR': 47.885}
     if "PRES" in ELECTION_USED or "HOUSE" in ELECTION_USED: lean = natlDemVote[ELECTION_USED]
     else: lean = gov_leans[STATE]
@@ -397,8 +403,6 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
 
     fig.tight_layout(pad=3.0)
 
-    fig.savefig(f"output/{STATE}{YEAR}/ensemble.png")
-    figBP.savefig(f"output/{STATE}{YEAR}/boxplot.png")
 
     # display the districts
     
@@ -487,13 +491,13 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     
     row = 0
     for partition in [initial_partition, minority_partition]:
-        partition.plot(units, ax=axMap[row,0], cmap="tab20")
+        partition.plot(units, ax=axMap[row,0], cmap=tab40)
         partition.plot(units, ax=axMap[row,1], cmap=minority_coloring(partition))
         partition.plot(units, ax=axMap[row,2], cmap=partisan_coloring(partition))
         row += 1
     row = 0
     for partition in [regression_partition, competitive_partition]:
-        partition.plot(units, ax=axMap2[row,0], cmap="tab20")
+        partition.plot(units, ax=axMap2[row,0], cmap=tab40)
         partition.plot(units, ax=axMap2[row,1], cmap=minority_coloring(partition))
         partition.plot(units, ax=axMap2[row,2], cmap=partisan_coloring(partition))
         row += 1
@@ -517,23 +521,26 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
         axMap2[2, col].set_title(colorbar_desc[col])
         colorbar.ColorbarBase(ax=axMap2[2,col], cmap=bar, orientation = 'horizontal')
     
+    fig.savefig(f"output/{STATE}{YEAR}/ensemble.png")
+    figBP.savefig(f"output/{STATE}{YEAR}/boxplot.png")
     figMap.savefig(f"output/{STATE}{YEAR}/map1.png")
     figMap2.savefig(f"output/{STATE}{YEAR}/map2.png")
 
 # OVERNIGHT RUNS
-analysis('AZ', 15000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
-analysis('CO', 6000, 'GOV18') # cleared
-analysis('GA', 10000, 'PRES16') # cleared
-analysis('MI', 8000, 'PRES16') # cleared - remade the json
+analysis('AZ', 16000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
+analysis('CO', 8000, 'GOV18') # cleared
+analysis('GA', 12000, 'PRES16') # cleared
+analysis('MI', 10000, 'PRES16') # cleared - remade the json
 analysis('MN', 6000, 'PRES16') # cleared
-analysis('NC', 12000, 'PRES16') # cleared; error with shapefile
-analysis('OH', 5000, 'PRES16') # cleared
-analysis('PA', 5000, 'PRES16') # cleared
-analysis('TX', 8000, 'PRES16') # cleared; error with shapefile
-analysis('WI', 3000, 'PRES16') # cleared
+analysis('NC', 14000, 'PRES16') # cleared; error with shapefile
+analysis('OH', 6000, 'PRES16') # cleared
+analysis('PA', 6000, 'PRES16') # cleared
+analysis('TX', 10000, 'PRES16') # cleared; error with shapefile
+analysis('WI', 5000, 'PRES16') # cleared
 
 # TEST
 # analysis('NC', 10, 'PRES16')
+# plt.show()
 
 # BAD
 # analysis('OR', 30, 'GOV18') # 2nd district has polsby popper of 5.511766159282041..... need to fix
