@@ -491,13 +491,13 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     
     row = 0
     for partition in [initial_partition, minority_partition]:
-        partition.plot(units, ax=axMap[row,0], cmap=tab40)
+        partition.plot(units, ax=axMap[row,0], cmap=tab40[:len(initial_partition.parts)])
         partition.plot(units, ax=axMap[row,1], cmap=minority_coloring(partition))
         partition.plot(units, ax=axMap[row,2], cmap=partisan_coloring(partition))
         row += 1
     row = 0
     for partition in [regression_partition, competitive_partition]:
-        partition.plot(units, ax=axMap2[row,0], cmap=tab40)
+        partition.plot(units, ax=axMap2[row,0], cmap=tab40[:len(initial_partition.parts)])
         partition.plot(units, ax=axMap2[row,1], cmap=minority_coloring(partition))
         partition.plot(units, ax=axMap2[row,2], cmap=partisan_coloring(partition))
         row += 1
@@ -532,11 +532,11 @@ analysis('CO', 8000, 'GOV18') # cleared
 analysis('GA', 12000, 'PRES16') # cleared
 analysis('MI', 10000, 'PRES16') # cleared - remade the json
 analysis('MN', 6000, 'PRES16') # cleared
-analysis('NC', 14000, 'PRES16') # cleared; error with shapefile
-analysis('OH', 6000, 'PRES16') # cleared
-analysis('PA', 6000, 'PRES16') # cleared
-analysis('TX', 10000, 'PRES16') # cleared; error with shapefile
-analysis('WI', 5000, 'PRES16') # cleared
+analysis('NC', 20000, 'PRES16') # cleared; error with shapefile
+analysis('OH', 12000, 'PRES16') # cleared
+analysis('PA', 12000, 'PRES16') # cleared
+analysis('TX', 15000, 'PRES16') # cleared; error with shapefile
+analysis('WI', 10000, 'PRES16') # cleared
 
 # TEST
 # analysis('NC', 10, 'PRES16')
