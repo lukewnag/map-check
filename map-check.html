@@ -65,6 +65,15 @@
                     <ul class="description">
                         <li>
                             <b>Minority representation</b>
+                            <p>Districting plans that suppress minority representation are illegal under the Equal 
+                                Protection Clause of the 14th Amendment. Under the loosest interpretation of this 
+                                restriction, any map that, when compared to maps in the ensemble, contains a 
+                                below-average number of minority opportunity districts is illegal. More liberal 
+                                interpretations of this restriction may require plans to maximize minority 
+                                representation when it is possible to do so without sacrificing traditional 
+                                redistricting principles, such as compactness and preservation of communities of 
+                                interest.
+                            </p>
                             <p> A district is categorized as a minority opportunity district if one of the following 
                                 conditions are satisfied:
                             </p>
@@ -184,15 +193,52 @@
                         </li>
                         <li>
                             <b>Efficiency gap</b>
-                            <p>e</p>
+                            <p>Each party only needs a simple majority of the votes, or 50% and one additional 
+                                vote, to win. Every vote above this 50% +1 threshold for the winning party, and 
+                                every vote for the losing party, has no effect on the outcome. We call all of 
+                                these votes "wasted votes."
+                            </p>
+                            <p>To calculate the efficiency gap, we first subtract the number of wasted votes for 
+                                the Democratic party from the number of wasted votes for the Republican party, then 
+                                divide this number by the total number of votes. An abnormally large efficiency 
+                                gap, especially when compared to the efficiency gaps of plans in the ensemble, 
+                                is usually a reliable indicator of gerrymandering.
+                            </p>
+                            <p>For more information, check out 
+                                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2457468">this article</a>.
+                            </p>
                         </li>
                         <li>
                             <b>Partisan Gini score</b>
-                            <p>e</p>
+                            <p>Like with calculating regression, we sort each district by their Democratic vote shares.
+                                However, instead of using points, we use a histogram with the x-axis scaled from 0 to 1.
+                                So for example, if we are trying to draw a map of n districts, the district with the 
+                                second-smallest Democratic vote share would have a bar running from 1/n to 2/n, and its 
+                                height would be its Democratic vote share.
+                            </p>
+                            <p>To calculate the partisan Gini score, we find the area of this graph's intersection with 
+                                its reflection about (.5, .5). Abnormally high partisan Gini scores are strong indicators 
+                                of partisan gerrymandering.
+                            </p>
                         </li>
                         <li>
                             <b>Composite score</b>
-                            <p>e</p>
+                            <p>After computing all of these metrics, we need to redo some of them! For the category 
+                                "expected Democrat seats," we calculate the average throughout all plans in our ensemble,
+                                then replace every value with its (positive) deviation from the mean. This means both an 
+                                excessive Republican number of seats and an excessive Democratic number of seats are 
+                                weighted the same way, instead of having one positive and one negative. Next, we 
+                                normalize the metrics so that their standard deviations in the ensemble are roughly 1. 
+                                Additionally, we assign negative weighting for metrics where a higher value is indicative 
+                                of gerrymandering, such as the partisan Gini score. After taht, we scale important metrics 
+                                up and less important or already covered metrics down. For example, average Polsby-Popper 
+                                is scaled down by about 50%, since important parts of it are already covered by minimum 
+                                Polsby-Popper. Finally, we add all of these together to produce the composite score.
+                            </p>
+                            <p>An enacted plan with an abnormally low composite score must have scored low on multiple 
+                                metrics, meaning it failed many gerrymandering tests and was likely drawn to be either a 
+                                racial or partisan gerrymander (or both).
+                            </p>
                         </li>
                     </ul>
                 </div>
