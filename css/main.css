@@ -229,6 +229,11 @@ h2 {
     font-size: 2rem;
 }
 
+.disclaimer {
+    font-size: 1rem;
+    padding-bottom: 1rem;
+}
+
 .analysis .container {
     padding: 4vw;
     font-size: 1.2rem;

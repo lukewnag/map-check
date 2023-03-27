@@ -195,7 +195,6 @@ colors40 = ["#c21f5b","#fbc02c","#ff5722","#bf360c","#fdf9c3","#c5cae9","#fff177
           "#253137","#ba68c8","#ffccbc","#9c27b0","#90a4ae","#e92663","#0488d1","#7986cb","#e64a18","#03a9f4","#f06292",
           "#f67f17","#19237e","#03579b","#cfd8dc","#ddedc8","#689f38","#607d8b","#b3e5fc","#303f9f","#33691d","#455a64",
           "#88144f","#8bc34a","#ff8a65","#4a198c","#7b21a2","#4fc3f7","#ffec3a"]
-tab40 = LinearSegmentedColormap.from_list("custom", colors40)
 
 # MARKOV CHAIN ANALYSIS
 
@@ -234,6 +233,7 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
 
     initial_partition = GeographicPartition(graph, assignment=ASSIGNMENT, updaters=my_updaters)
     # print(overall_polsby_popper(initial_partition))
+    district_coloring = LinearSegmentedColormap.from_list("custom", colors40[:len(initial_partition.parts)])
 
     # The ReCom proposal needs to know the ideal population for the districts so that
     # we can improve speed by bailing early on unbalanced partitions.
@@ -491,13 +491,13 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     
     row = 0
     for partition in [initial_partition, minority_partition]:
-        partition.plot(units, ax=axMap[row,0], cmap=tab40[:len(initial_partition.parts)])
+        partition.plot(units, ax=axMap[row,0], cmap=district_coloring)
         partition.plot(units, ax=axMap[row,1], cmap=minority_coloring(partition))
         partition.plot(units, ax=axMap[row,2], cmap=partisan_coloring(partition))
         row += 1
     row = 0
     for partition in [regression_partition, competitive_partition]:
-        partition.plot(units, ax=axMap2[row,0], cmap=tab40[:len(initial_partition.parts)])
+        partition.plot(units, ax=axMap2[row,0], cmap=district_coloring)
         partition.plot(units, ax=axMap2[row,1], cmap=minority_coloring(partition))
         partition.plot(units, ax=axMap2[row,2], cmap=partisan_coloring(partition))
         row += 1
@@ -527,11 +527,11 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     figMap2.savefig(f"output/{STATE}{YEAR}/map2.png")
 
 # OVERNIGHT RUNS
-analysis('AZ', 16000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
-analysis('CO', 8000, 'GOV18') # cleared
-analysis('GA', 12000, 'PRES16') # cleared
-analysis('MI', 10000, 'PRES16') # cleared - remade the json
-analysis('MN', 6000, 'PRES16') # cleared
+analysis('AZ', 20000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
+analysis('CO', 12000, 'GOV18') # cleared
+analysis('GA', 15000, 'PRES16') # cleared
+analysis('MI', 15000, 'PRES16') # cleared - remade the json
+analysis('MN', 12000, 'PRES16') # cleared
 analysis('NC', 20000, 'PRES16') # cleared; error with shapefile
 analysis('OH', 12000, 'PRES16') # cleared
 analysis('PA', 12000, 'PRES16') # cleared
