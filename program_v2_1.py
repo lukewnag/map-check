@@ -15,12 +15,14 @@ dem_field_gov18 = {'AZ': 'GOV18D', 'CO': 'GOV18D', 'MI': 'GOV18D', 'OR': 'GOV18D
 gop_field_gov18 = {'AZ': 'GOV18R', 'CO': 'GOV18R', 'MI': 'GOV18R', 'OR': 'GOV18R'}
 dem_field_house18 = {'AZ': 'USH18D', 'CO': 'USH18D', 'OR': 'USH18D'}
 gop_field_house18 = {'AZ': 'USH18R', 'CO': 'USH18R', 'OR': 'USH18R'}
+dem_field_pres20 = {'SC': 'G20PREDBID'}
+gop_field_pres20 = {'SC': 'G20PREDBID'}
 pop_field = {'AZ': 'TOTPOP', 'CO': 'TOTPOP', 'GA': 'TOTPOP', 'MI': 'TOTPOP', 'MN': 'TOTPOP', 'NC': 'TOTPOP',
              'OH': 'TOTPOP', 'OR': 'TOTPOP', 'PA': 'TOTPOP', 'TX': 'TOTPOP', 'VA': 'TOTPOP', 'WI': 'PERSONS'}
 assignment_field = {'AZ': 'CD', 'CO': 'CD116FP', 'GA': 'CD', 'MI': 'CD', 'MN': 'CONGDIST', 'NC': 'newplan',
                     'OH': 'CD', 'OR': 'CD', 'PA': 'CD_2011', 'TX': 'USCD', 'VA': 'CD_16', 'WI': 'CON'}
 projection_code = {'AZ': '2223', 'CO': '2957', 'GA': '4019', 'MI': '6493', 'MN': '26915', 'NC': '6543',
-                   'OH': '3747', 'OR': '2992', 'PA': '26918', 'TX': '3081', 'VA': '3968', 'WI': '26916'}
+                   'OH': '3747', 'OR': '2992', 'PA': '26918', 'SC': '4269', 'TX': '3081', 'VA': '3968', 'WI': '26916'}
 county_field = {'AZ': 'COUNTY', 'CO': 'COUNTYFP', 'GA': 'CTYNAME', 'MI': 'county_nam', 'MN': 'COUNTYNAME', 'NC': 'County',
                 'OH': 'COUNTY', 'OR': 'County', 'PA': 'COUNTYFP10', 'TX': 'COUNTY', 'VA': 'locality', 'WI': 'CNTY_NAME'}
 white_pop_field = {'AZ': 'NH_WHITE', 'CO': 'NH_WHITE', 'GA': 'NH_WHITE', 'MI': 'NH_WHITE', 'MN': 'NH_WHITE', 'NC': 'NH_WHITE',
@@ -198,11 +200,9 @@ colors40 = ["#c21f5b","#fbc02c","#ff5722","#bf360c","#fdf9c3","#c5cae9","#fff177
 
 # MARKOV CHAIN ANALYSIS
 
-def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
-    
-    YEAR = "2011"
+def analysis(STATE, YEAR, TOTAL_STEPS, ELECTION_USED):
 
-    dem_vote, gop_vote = 0, 0
+    dem_vote, gop_vote = 'G20PREDBID', 'G20PRERTRU'
     if ELECTION_USED == "PRES16":
         dem_vote = dem_field_pres16[STATE]
         gop_vote = gop_field_pres16[STATE]
@@ -212,10 +212,14 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     elif ELECTION_USED == "HOUSE18":
         dem_vote = dem_field_house18[STATE]
         gop_vote = gop_field_house18[STATE]
-    POP_FIELD_NAME = pop_field[STATE]
-    WHITE_POP = white_pop_field[STATE]
-    COUNTY_FIELD_NAME = county_field[STATE]
-    ASSIGNMENT = assignment_field[STATE]
+    if STATE in pop_field: POP_FIELD_NAME = pop_field[STATE]
+    else: POP_FIELD_NAME = 'TOTPOP'
+    if STATE in white_pop_field: WHITE_POP = white_pop_field[STATE]
+    else: WHITE_POP = 'NH_WHITE'
+    if STATE in county_field: COUNTY_FIELD_NAME = county_field[STATE]
+    else: COUNTY_FIELD_NAME = 'COUNTY'
+    if STATE in assignment_field: ASSIGNMENT = assignment_field[STATE]
+    else: ASSIGNMENT = 'CD'
 
     graph = Graph.from_json(''.join(['maps/', STATE, YEAR, '/', STATE, '_VTDs.json']))
 
@@ -527,16 +531,17 @@ def analysis(STATE, TOTAL_STEPS, ELECTION_USED):
     figMap2.savefig(f"output/{STATE}{YEAR}/map2.png")
 
 # OVERNIGHT RUNS
-analysis('AZ', 20000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
-analysis('CO', 12000, 'GOV18') # cleared
-analysis('GA', 15000, 'PRES16') # cleared
-analysis('MI', 15000, 'PRES16') # cleared - remade the json
-analysis('MN', 12000, 'PRES16') # cleared
-analysis('NC', 20000, 'PRES16') # cleared; error with shapefile
-analysis('OH', 12000, 'PRES16') # cleared
-analysis('PA', 12000, 'PRES16') # cleared
-analysis('TX', 15000, 'PRES16') # cleared; error with shapefile
-analysis('WI', 10000, 'PRES16') # cleared
+# analysis('AZ', '2011', 20000, 'GOV18') # cleared; error with shapefile: very many overlaps among polygons
+# analysis('CO', '2011', 12000, 'GOV18') # cleared
+# analysis('GA', '2011', 15000, 'PRES16') # cleared
+# analysis('MI', '2011', 15000, 'PRES16') # cleared - remade the json
+# analysis('MN', '2011', 12000, 'PRES16') # cleared
+# analysis('NC', '2011', 20000, 'PRES16') # cleared; error with shapefile
+# analysis('OH', '2011', 12000, 'PRES16') # cleared
+# analysis('PA', '2011', 12000, 'PRES16') # cleared
+# analysis('SC', '2021', 20000, 'PRES20')
+# analysis('TX', '2011', 15000, 'PRES16') # cleared; error with shapefile
+# analysis('WI', '2011', 10000, 'PRES16') # cleared
 
 # TEST
 # analysis('NC', 10, 'PRES16')

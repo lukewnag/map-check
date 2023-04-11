@@ -2,20 +2,20 @@ var ensembleList = Array();
 var boxplotList = Array();
 var map1List = Array();
 var map2List = Array();
-var states = ['AZ', 'CO', 'GA', 'MI', 'MN', 'NC', 'OH', 'PA', 'TX', 'WI']
+var states = ['AZ', 'CO', 'GA', 'IL', 'MI', 'MN', 'NC', 'OH', 'PA', 'SC', 'TX', 'WI']
 for (var i = 0; i < 10; i++) {
     ensembleList[i] = new Image(800, 600);
-    ensembleList[i].src = "./output/" + states[i] + "2011/ensemble.png";
+    ensembleList[i].src = "./output/" + states[i] + "/ensemble.png";
     boxplotList[i] = new Image(1400, 600);
-    boxplotList[i].src = "./output/" + states[i] + "2011/boxplot.png";
+    boxplotList[i].src = "./output/" + states[i] + "/boxplot.png";
     map1List[i] = new Image(1400, 700);
-    map1List[i].src = "./output/" + states[i] + "2011/map1.png";
+    map1List[i].src = "./output/" + states[i] + "/map1.png";
     map2List[i] = new Image(1400, 700);
-    map2List[i].src = "./output/" + states[i] + "2011/map2.png";
+    map2List[i].src = "./output/" + states[i] + "/map2.png";
 }
 
-var stateFullNames = ['Arizona', 'Colorado', 'Georgia', 'Michigan', 'Minnesota', 'North Carolina',
-    'Ohio', 'Pennsylvania', 'Texas', 'Wisconsin']
+var stateFullNames = ['Arizona', 'Colorado', 'Georgia', 'Illinois', 'Michigan', 'Minnesota', 'North Carolina',
+    'Ohio', 'Pennsylvania', 'South Carolina', 'Texas', 'Wisconsin']
 function switchImage() {
     var selectedImage = document.stateSelector.switch.options[document.stateSelector.switch.selectedIndex].value;
     document.ensemble.src = ensembleList[selectedImage].src;
